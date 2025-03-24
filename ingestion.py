@@ -13,8 +13,11 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small", api_key=OPENAI_API_KEY)
 
+
 def ingest_docs():
-    loader = ReadTheDocsLoader("langchain-docs/api.python.langchain.com/en/latest", encoding="utf-8")
+    loader = ReadTheDocsLoader(
+        "langchain-docs/api.python.langchain.com/en/latest", encoding="utf-8"
+    )
     raw_documents = loader.load()
     print(f"loaded {len(raw_documents)} documents")
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=600, chunk_overlap=50)
@@ -29,7 +32,6 @@ def ingest_docs():
     print("****** Added to Pinecone vectorstore vectors")
 
 
-
 if __name__ == "__main__":
-    
+
     ingest_docs()
